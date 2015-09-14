@@ -4,7 +4,10 @@ import random
 import math
 import operator
 import yaml
+import os
 from utils_metrics import *
+
+print(os.getcwd() + "\n")
 
 with open('config.yaml', 'r') as f:
     config = yaml.load(f)
