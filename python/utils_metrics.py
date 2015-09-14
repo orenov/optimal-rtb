@@ -64,7 +64,7 @@ def rmsle(actual, predicted):
 
 def ce(actual, predicted):
     # Classification error
-     if len(actual) != len(predicted):
+    if len(actual) != len(predicted):
         print("Lengths of predictions/actuals are different")
     temp = [0] * len(actual)
     for i in range(0, len(actual)):
