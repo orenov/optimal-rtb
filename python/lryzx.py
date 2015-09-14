@@ -9,7 +9,7 @@ from utils_metrics import *
 
 print(os.getcwd() + "\n")
 
-with open('../python/config.yaml', 'r') as f:
+with open('../config.yaml', 'r') as f:
     config = yaml.load(f)
 
 bufferCaseNum = 2^(config["logit"]["bits"])
