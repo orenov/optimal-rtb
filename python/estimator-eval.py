@@ -3,8 +3,7 @@ import sys
 import random
 import math
 import operator
-from sklearn.metrics import roc_auc_score
-from sklearn.metrics import mean_squared_error
+from utils_metrics import *
 
 def ints(s):
     res = []
@@ -55,8 +54,8 @@ for line in fi:
 fi.close()
 
 # evaluation
-auc = roc_auc_score(y, yp)
-rmse = math.sqrt(mean_squared_error(y, yp))
+auc = auc(y, yp)
+rmse = math.sqrt(mse(y, yp))
 print "algo\tauc\trmse"
 print "lr" + '\t' + str(auc) + '\t' + str(rmse)
 

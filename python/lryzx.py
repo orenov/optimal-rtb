@@ -3,17 +3,19 @@ import sys
 import random
 import math
 import operator
-from sklearn.metrics import roc_auc_score
-from sklearn.metrics import mean_squared_error
+import yaml
+from utils_metrics import *
 
+with open('config.yaml', 'r') as f:
+    config = yaml.load(f)
 
-bufferCaseNum = 1000000
-eta = 0.01
-lamb = 1E-6
-featWeight = {}
-trainRounds = 10
-random.seed(10)
-initWeight = 0.05
+bufferCaseNum = 2^(config["logit"]["bits"])
+eta           = config["logit"]["eta"]
+lamb          = config["logit"]["lambda"]
+featWeight    = {}
+trainRounds   = config["logit"]["trainRounds"]
+initWeight    = config["logit"]["initWeight"]
+random.seed(config["logit"]["randomSeed"])
 
 def nextInitWeight():
     return (random.random() - 0.5) * initWeight
@@ -64,7 +66,7 @@ for round in range(0, trainRounds):
     if len(trainData) > 0:
         for data in trainData:
             clk = data[0]
-            mp = data[1]
+            mp  = data[1]
             fsid = 2 # feature start id
             # predict
             pred = 0.0
@@ -99,13 +101,13 @@ for round in range(0, trainRounds):
         y.append(clk)
         yp.append(pred)
     fi.close()
-    auc = roc_auc_score(y, yp)
-    rmse = math.sqrt(mean_squared_error(y, yp))
+    auc = auc(y, yp)
+    rmse = math.sqrt(mse(y, yp))
     print str(round) + '\t' + str(auc) + '\t' + str(rmse)
 
 # output the weights
 fo = open(sys.argv[1] + '.lr.weight', 'w')
-featvalue = sorted(featWeight.iteritems(), key=operator.itemgetter(0))
+featvalue = sorted(featWeight.iteritems(), key = operator.itemgetter(0))
 for fv in featvalue:
     fo.write(str(fv[0]) + '\t' + str(fv[1]) + '\n')
 fo.close()

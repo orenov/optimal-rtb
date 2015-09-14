@@ -1,0 +1,7 @@
+logit:
+    eta : 0.01
+    trainRounds : 10
+    randomSeed : 5
+    lambda : 1E-6
+    initWeight : 0.05
+    bits : 13

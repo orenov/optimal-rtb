@@ -107,9 +107,9 @@ fi.close()
 # parameters setting for each bidding strategy
 budget_proportions = [64, 16] # , 32, 8]
 const_paras = range(2, 20, 2) + range(20, 100, 5) + range(100, 301, 10)
-rand_paras = range(2, 20, 2) + range(20, 100, 5) + range(100, 501, 10)
-mcpc_paras = [1]
-lin_paras = range(2, 20, 2) + range(20, 100, 5) + range(100, 400, 10) + range(400, 800, 50)
+rand_paras  = range(2, 20, 2) + range(20, 100, 5) + range(100, 501, 10)
+mcpc_paras  = [1]
+lin_paras   = range(2, 20, 2) + range(20, 100, 5) + range(100, 400, 10) + range(400, 800, 50)
 
 algo_paras = {"const":const_paras, "rand":rand_paras, "mcpc":mcpc_paras, "lin":lin_paras}
 
