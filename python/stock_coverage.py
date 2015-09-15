@@ -8,12 +8,19 @@ if __name__ == '__main__':
                      "imp.20130315.txt.bz2", "imp.20130316.txt.bz2", "imp.20130317.txt.bz2"]
     folder_files1 = "training1st"
 
-    counter_bids = {}
+    counter_bids = 0
+    counter_imps = 0
 
-    with open("../../make-ipinyou-data/1458/train.log.txt", 'r') as f:   
-        for line in f: 
-            print line
-            print len(line.strip().split("\t"))
-            sys.exit(1)
-        print "Exiting" 
-        print "I used file: " + osm_file 
+    for bid_file in bids_files1:    
+        source_file = bz2.BZ2File("../../make-ipinyou-data/original-data/ipinyou.contest.dataset/training1st/" + bid_file , "r") 
+        for line in source_file: 
+            counter_bids += 1
+    
+    print("Bids counter = {0}".format(counter_bids))
+
+    for imp_file in imp_files1:    
+        source_file = bz2.BZ2File("../../make-ipinyou-data/original-data/ipinyou.contest.dataset/training1st/" + imp_file , "r") 
+        for line in source_file: 
+            counter_imps += 1
+
+    print("Imps counter = {0}".format(counter_imps))
