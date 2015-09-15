@@ -23,33 +23,33 @@ if len(sys.argv) < 6:
     print 'Usage: train.log.txt test.log.txt test.lr.txt.pred test.gbrt.txt.pred rtb-result.txt'
     exit(-1)
 
-ccfm = [] # clk cnv floor market
-lrpctrs = []
+ccfm      = [] # clk cnv floor market
+lrpctrs   = []
 gbrtpctrs = []
 totalcost = 0
-tecpc = 0.
-tctr = 0.
+tecpc     = 0.
+tctr      = 0.
 
 # read in train data for tecpc and tctr
-fi = open(sys.argv[1], 'r')
+fi    = open(sys.argv[1], 'r')
 first = True
-num = 0
+num   = 0
 for line in fi:
     s = line.split('\t')
     if first:
         first = False
         continue
-    clk = int(s[0])
-    cost = int(s[23])
-    num += 1
-    tctr += clk
+    clk    = int(s[0])
+    cost   = int(s[23])
+    num   += 1
+    tctr  += clk
     tecpc += cost
 fi.close()
 tecpc /= tctr
-tctr /= num
+tctr  /= num
 
 # read in test data
-fi = open(sys.argv[2], 'r')
+fi    = open(sys.argv[2], 'r')
 first = True
 for line in fi:
     s = line.split('\t')
@@ -58,7 +58,7 @@ for line in fi:
         continue
     clk = int(s[27])
     cnv = int(s[28])
-    floorprice = int(s[20])
+    floorprice  = int(s[20])
     marketprice = int(s[23])
     ccfm.append((clk, cnv, floorprice, marketprice))
     totalcost+= marketprice

@@ -22,6 +22,11 @@ def bidding_lin(pctr, base_ctr, base_bid):
 def win_auction(case, bid):
     return bid > case[1]  # bid > winning price
 
+def bidding_ortb1(pctr, para):
+    c, multiplier = para
+    sq = math.sqrt(c * pctr/float(multiplier) + c**2) - c
+    return int(sq)
+
 # budgetProportion clk cnv bid imp budget spend para
 def simulate_one_bidding_strategy_with_parameter(cases, ctrs, tcost, proportion, algo, para):
     budget = int(tcost / proportion) # intialise the budget
@@ -41,6 +46,8 @@ def simulate_one_bidding_strategy_with_parameter(cases, ctrs, tcost, proportion,
             bid = bidding_mcpc(original_ecpc, pctr)
         elif algo == "lin":
             bid = bidding_lin(pctr, original_ctr, para)
+        elif algo == "ortb1";
+            bid = bidding_ortb1(pctr, para)
         else:
             print 'wrong bidding strategy name'
             sys.exit(-1)
@@ -116,12 +123,15 @@ fi.close()
 
 # parameters setting for each bidding strategy
 budget_proportions = [64, 16] # , 32, 8]
-const_paras = range(2, 20, 2) + range(20, 100, 5) + range(100, 301, 10)
-rand_paras  = range(2, 20, 2) + range(20, 100, 5) + range(100, 501, 10)
-mcpc_paras  = [1]
-lin_paras   = range(2, 20, 2) + range(20, 100, 5) + range(100, 400, 10) + range(400, 800, 50)
+const_paras     = range(2, 20, 2) + range(20, 100, 5) + range(100, 301, 10)
+rand_paras      = range(2, 20, 2) + range(20, 100, 5) + range(100, 501, 10)
+mcpc_paras      = [1]
+lin_paras       = range(2, 20, 2) + range(20, 100, 5) + range(100, 400, 10) + range(400, 800, 50)
+list_c          = range(2, 20, 2) + range(20, 100, 5) + range(100, 301, 10)
+list_multiplier = range(2, 20, 2) + range(20, 100, 5) + range(100, 301, 10)
+ortb1_paras     = zip(list_c, list_multiplier)
 
-algo_paras = {"const":const_paras, "rand":rand_paras, "mcpc":mcpc_paras, "lin":lin_paras}
+algo_paras = {"const":const_paras, "rand":rand_paras, "mcpc":mcpc_paras, "lin":lin_paras, "ortb1" : ortb1_paras}
 
 # initalisation finished
 # rock!
