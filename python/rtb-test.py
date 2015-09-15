@@ -24,10 +24,8 @@ def win_auction(case, bid):
 # budgetProportion clk cnv bid imp budget spend para
 def simulate_one_bidding_strategy_with_parameter(cases, ctrs, tcost, proportion, algo, para):
     budget = int(tcost / proportion) # intialise the budget
-    cost = 0
-    clks = 0
-    bids = 0
-    imps = 0
+    cost, clks, bids, imps = 0
+    
     for idx in range(0, len(cases)):
         bid = 0
         pctr = ctrs[idx]
@@ -66,14 +64,14 @@ if len(sys.argv) < 5:
     exit(-1)
 
 clicks_prices = []  # clk and price
-pctrs = []          # pCTR from logistic regression prediciton
-total_cost = 0      # total original cost during the test data
+pctrs         = []  # pCTR from logistic regression prediciton
+total_cost    = 0   # total original cost during the test data
 original_ecpc = 0.  # original eCPC from train data
-original_ctr = 0.   # original ctr from train data
+original_ctr  = 0.  # original ctr from train data
 
 # read in train data for original_ecpc and original_ctr
-fi = open(sys.argv[1], 'r') # train.yzx.txt
-first = True
+fi      = open(sys.argv[1], 'r') # train.yzx.txt
+first   = True
 imp_num = 0
 for line in fi:
     s = line.split(' ')
@@ -82,12 +80,12 @@ for line in fi:
         continue
     click = int(s[0])  # y
     cost  = int(s[1])  # z
-    imp_num += 1
-    original_ctr += click
+    imp_num       += 1
+    original_ctr  += click
     original_ecpc += cost
 fi.close()
 original_ecpc /= original_ctr
-original_ctr /= imp_num
+original_ctr  /= imp_num
 
 # read in test data
 fi = open(sys.argv[2], 'r') # test.yzx.txt
@@ -112,7 +110,7 @@ rand_paras  = range(2, 20, 2) + range(20, 100, 5) + range(100, 501, 10)
 mcpc_paras  = [1]
 lin_paras   = range(2, 20, 2) + range(20, 100, 5) + range(100, 400, 10) + range(400, 800, 50)
 
-algo_paras  = {"const":const_paras, "rand":rand_paras, "mcpc":mcpc_paras, "lin":lin_paras}
+algo_paras = {"const":const_paras, "rand":rand_paras, "mcpc":mcpc_paras, "lin":lin_paras}
 
 # initalisation finished
 # rock!
