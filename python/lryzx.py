@@ -28,7 +28,7 @@ class OnlineLogisticRegression:
     def update(self, data, pred, actual):
         for i in range(0, len(data)):
             feat = data[i]
-            self.featWeight[feat] = self.featWeight * (1 - self.lamb) + self.eta * (actual - pred)
+            self.featWeight[feat] = self.featWeight[feat] * (1 - self.lamb) + self.eta * (actual - pred)
 
         return(0)
 
@@ -37,9 +37,9 @@ class OnlineLogisticRegression:
         for i in range(0, len(data)):
             feat = data[i]
             if feat not in self.featWeight:
-                self.featWeight[feat] = self.nextInitWeight()
+                self.featWeight[feat] = self.__nextInitWeight()
             pred += self.featWeight[feat]
-        pred = sigmoid(pred)
+        pred = self.__sigmoid(pred)
 
         return(pred)
 
