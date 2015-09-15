@@ -39,12 +39,12 @@ if __name__ == '__main__':
                      "imp.20130610.txt.bz2", "imp.20130611.txt.bz2", "imp.20130612.txt.bz2"]
     folder_files2 = "training2nd"
     # Season 3 data
-    bids_files3 =  ["bid.20131019.txt.bz2", "bid.20131020.txt.bz2", "bid.20131021.txt.bz2", "bid.20131022.txt.bz2",
-                    "bid.20131023.txt.bz2", "bid.20131024.txt.bz2", "bid.20131025.txt.bz2",
-                    "bid.20131026.txt.bz2", "bid.20131027.txt.bz2", "bid.20131028.txt.bz2"]
-    imp_files3  =  ["imp.20131019.txt.bz2", "imp.20131020.txt.bz2", "imp.20131021.txt.bz2", "imp.20131022.txt.bz2",
-                    "imp.20131023.txt.bz2", "imp.20131024.txt.bz2", "imp.20131025.txt.bz2",
-                    "imp.20131026.txt.bz2", "imp.20131027.txt.bz2"]
+    bids_files3   = ["bid.20131019.txt.bz2", "bid.20131020.txt.bz2", "bid.20131021.txt.bz2", "bid.20131022.txt.bz2",
+                     "bid.20131023.txt.bz2", "bid.20131024.txt.bz2", "bid.20131025.txt.bz2",
+                     "bid.20131026.txt.bz2", "bid.20131027.txt.bz2", "bid.20131028.txt.bz2"]
+    imp_files3    = ["imp.20131019.txt.bz2", "imp.20131020.txt.bz2", "imp.20131021.txt.bz2", "imp.20131022.txt.bz2",
+                     "imp.20131023.txt.bz2", "imp.20131024.txt.bz2", "imp.20131025.txt.bz2",
+                     "imp.20131026.txt.bz2", "imp.20131027.txt.bz2"]
     folder_files3 = "training3rd"
     #Dict for saving presentages
     res = {}
