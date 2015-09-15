@@ -14,6 +14,7 @@ def sigmoid(p):
 
 def estimator_lr(feats):
     pred = 0.0
+    # possibly pred = sum([featWeight[feat] for feat in feats if feat in featWeight])
     for feat in feats:
         if feat in featWeight:
             pred += featWeight[feat]

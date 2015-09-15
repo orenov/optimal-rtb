@@ -87,7 +87,7 @@ for round in range(0, trainRounds):
     yp = []
     fi = open(sys.argv[2], 'r')
     for line in fi:
-        data = ints(line.replace(":1", "").split())
+        data = convert_to_ints(line.replace(":1", "").split())
         clk  = data[0]
         mp   = data[1]
         fsid = 2 # feature start id
@@ -100,7 +100,7 @@ for round in range(0, trainRounds):
         y.append(clk)
         yp.append(pred)
     fi.close()
-    auc = auc_roc(y, yp)
+    auc = auc_roc_score(y, yp)
     rmse = math.sqrt(mse(y, yp))
     print str(round) + '\t' + str(auc) + '\t' + str(rmse)
 
