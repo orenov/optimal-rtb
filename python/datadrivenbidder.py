@@ -11,10 +11,9 @@ def ortb2_win(x,c):
     return((x**2)/(x**2 + c**2))
 
 class DD_ORTB1():
-    def __init__(self):
-        self.c    = None
-        self.lamb = None
-        pass
+    def __init__(self, c = None, lamb = None):
+        self.c    = c
+        self.lamb = lamb
 
     def batch_fit(self, data):
         # data need to be in table format preferably or csv file
@@ -32,6 +31,9 @@ class DD_ORTB1():
     def bidding(self, pctr):
         sq = math.sqrt(self.c * pctr/float(self.lamb) + self.c**2) - self.c
         return int(sq)
+
+    def getC(self):
+        return(self.c)
 
 class DD_ORTB2():
     def __init__(self):

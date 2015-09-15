@@ -119,6 +119,7 @@ fi.close()
 original_ecpc /= original_ctr
 original_ctr  /= imp_num
 
+# Fitting init
 class_ortb1 = datadrivenbidder.DD_ORTB1()
 #class_ortb2 = datadrivenbidder.DD_ORTB2()
 class_ortb1.batch_fit(data_for_ddrtb)
@@ -146,13 +147,14 @@ const_paras     = range(2, 20, 2) + range(20, 100, 5) + range(100, 301, 10)
 rand_paras      = range(2, 20, 2) + range(20, 100, 5) + range(100, 501, 10)
 mcpc_paras      = [1]
 lin_paras       = range(2, 20, 2) + range(20, 100, 5) + range(100, 400, 10) + range(400, 800, 50)
-list_c          = [20, 50, 80]
-list_multiplier = [x * 1E-07 for x in range(1, 41)]
-ortb1_paras     = list(itertools.product(list_c, list_multiplier))
+
+best_c          = class_ortb1.getC()
+list_lambd      = [x * 1E-07 for x in range(1, 41)]
+ortb1_paras     = [DD_ORTB1(best_c, x) for x in list_lambd]
 
 algo_paras = {"const" : const_paras, "rand"  : rand_paras,
               "mcpc"  : mcpc_paras,  "lin"   : lin_paras,
-              "ortb1" : [class_ortb1]}
+              "ortb1" : ortb1_paras}
 
 # initalisation finished
 # rock!
