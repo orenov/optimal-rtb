@@ -94,7 +94,7 @@ def rankdata(a):
     return newarray
 
 
-def auc(actual, predicted):
+def auc_roc_score(actual, predicted):
     r     = rankdata(predicted)
     n_pos = sum(actual) 
     n_neg = len(actual) - n_pos

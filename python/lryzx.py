@@ -10,8 +10,8 @@ from utils_metrics import *
 with open('../config.yaml', 'r') as f:
     config = yaml.load(f)
 
-bufferCaseNum = 2^(config["logit"]["bits"])
-eta           = config["logit"]["eta"]
+bufferCaseNum = config["logit"]["buffercase"]
+eta           = config["logit"]["learning_rate"]
 lamb          = config["logit"]["lambda"]
 featWeight    = {}
 trainRounds   = config["logit"]["trainRounds"]
@@ -21,10 +21,8 @@ random.seed(config["logit"]["randomSeed"])
 def nextInitWeight():
     return (random.random() - 0.5) * initWeight
 
-def ints(s):
-    res = []
-    for ss in s:
-        res.append(int(ss))
+def convert_to_ints(s):
+    res = [int(ss) for ss in s]
     return res
 
 def sigmoid(p):
@@ -43,7 +41,7 @@ for round in range(0, trainRounds):
     trainData = []
     for line in fi:
         lineNum = (lineNum + 1) % bufferCaseNum
-        trainData.append(ints(line.replace(":1", "").split()))
+        trainData.append(convert_to_ints(line.replace(":1", "").split())) # orenov: why replace?
         if lineNum == 0:
             for data in trainData:
                 clk  = data[0]
@@ -61,7 +59,7 @@ for round in range(0, trainRounds):
                 # w_i = w_i + learning_rate * [ (y - p) * x_i - lamb * w_i ] 
                 for i in range(fsid, len(data)):
                     feat = data[i]
-                    featWeight[feat] = featWeight[feat] * (1 - lamb) + eta * (clk - pred)
+                    featWeight[feat] = featWeight[feat] * (1 - lamb) + eta * (clk - pred) 
             trainData = []
 
     if len(trainData) > 0:
@@ -85,7 +83,7 @@ for round in range(0, trainRounds):
     fi.close()
 
     # test for this round
-    y = []
+    y  = []
     yp = []
     fi = open(sys.argv[2], 'r')
     for line in fi:
@@ -102,7 +100,7 @@ for round in range(0, trainRounds):
         y.append(clk)
         yp.append(pred)
     fi.close()
-    auc = auc(y, yp)
+    auc = auc_roc(y, yp)
     rmse = math.sqrt(mse(y, yp))
     print str(round) + '\t' + str(auc) + '\t' + str(rmse)
 
@@ -119,7 +117,7 @@ fi = open(sys.argv[2], 'r')
 fo = open(sys.argv[2] + '.lr.pred', 'w')
 
 for line in fi:
-    data = ints(line.replace(":1", "").split())
+    data = convert_to_ints(line.replace(":1", "").split())
     pred = 0.0
     for i in range(1, len(data)):
         feat = data[i]

@@ -6,9 +6,7 @@ import operator
 from utils_metrics import *
 
 def ints(s):
-    res = []
-    for ss in s:
-        res.append(int(ss))
+    res = [int(ss) for ss in s]
     return res
 
 def sigmoid(p):
@@ -54,7 +52,7 @@ for line in fi:
 fi.close()
 
 # evaluation
-auc = auc(y, yp)
+auc = auc_roc_score(y, yp)
 rmse = math.sqrt(mse(y, yp))
 print "algo\tauc\trmse"
 print "lr" + '\t' + str(auc) + '\t' + str(rmse)

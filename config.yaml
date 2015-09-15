@@ -1,7 +1,7 @@
 logit:
-    eta : 0.01
+    learning_rate : 0.01
     trainRounds : 10
     randomSeed : 5
     lambda : 0.000001
     initWeight : 0.05
-    bits : 13
+    buffercase : 1000000
