@@ -3,6 +3,12 @@ import os
 import sys
 from scipy.optimize import curve_fit
 
+def ortb1_win(x, c):
+    return(x/(x+c))
+
+def orbt2_win(x,c):
+    pass
+
 class DD_ORTB1():
     def __init__(self):
         self.c    = None
@@ -15,12 +21,9 @@ class DD_ORTB1():
         # preferably tuple list
         pp = sorted([x[1] for x in data]) #paying price
         de = [float(x) / (len(pp) + 1) for x in range(1, len(pp)+1)]
-
-        popt, pcov = curve_fit(self.__wining_function, pp, de)
-        print(popt)
-        print(pcov)
-        sys.exit(1)
-        pass
+	
+        popt, pcov = curve_fit(ortb1_win, pp, de)
+        self.c = popt[0]
 
     def bidding(pctr):
         pass

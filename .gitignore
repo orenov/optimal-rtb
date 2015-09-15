@@ -1,4 +1,5 @@
 *.pyc
 *.csv
+*.tsv
 results/rtb.results.1458.best.perf.tsv
 results/rtb.results.1458.tsv
