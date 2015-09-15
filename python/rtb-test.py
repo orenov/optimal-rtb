@@ -28,6 +28,15 @@ def bidding_ortb1(pctr, para):
     sq = math.sqrt(c * pctr/float(multiplier) + c**2) - c
     return int(sq)
 
+def biddint_ortb2(pctr, para):
+    c, multiplier = para
+    c = float(c)
+    multiplier  = float(multiplier)
+    s1 = (pctr + math.sqrt((c*multiplier)**2 + pctr**2)) / (c * multiplier)
+    s2 = (c * multiplier) / (pctr + math.sqrt((c*multiplier)**2 + pctr**2))
+    sq = c * (s1**(1./3) - s2**(1./3))
+    return int(sq)
+
 # budgetProportion clk cnv bid imp budget spend para
 def simulate_one_bidding_strategy_with_parameter(cases, ctrs, tcost, proportion, algo, para):
     budget = int(tcost / proportion) # intialise the budget
@@ -49,6 +58,8 @@ def simulate_one_bidding_strategy_with_parameter(cases, ctrs, tcost, proportion,
             bid = bidding_lin(pctr, original_ctr, para)
         elif algo == "ortb1":
             bid = bidding_ortb1(pctr, para)
+        elif algo == "ortb2":
+            bid = biddint_ortb2(pctr, para)
         else:
             print 'wrong bidding strategy name'
             sys.exit(-1)
@@ -78,8 +89,8 @@ if len(sys.argv) < 5:
 
 with open('../config.yaml', 'r') as f:
     config = yaml.load(f)
-max_bid       = config["bidprice"]["maximumbid"]
 
+max_bid       = config["bidprice"]["maximumbid"]
 clicks_prices = []  # clk and price
 pctrs         = []  # pCTR from logistic regression prediciton
 total_cost    = 0   # total original cost during the test data
@@ -132,7 +143,8 @@ list_c          = [20, 50, 80]
 list_multiplier = [x * 1E-07 for x in range(1, 41)]
 ortb1_paras     = list(itertools.product(list_c, list_multiplier))
 
-algo_paras = {"const":const_paras, "rand":rand_paras, "mcpc":mcpc_paras, "lin":lin_paras, "ortb1":ortb1_paras}
+algo_paras = {"const":const_paras, "rand":rand_paras, "mcpc":mcpc_paras, "lin":lin_paras,
+              "ortb1":ortb1_paras, "ortb2" : ortb1_paras}
 
 # initalisation finished
 # rock!
