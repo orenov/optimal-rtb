@@ -34,26 +34,26 @@ featWeight = {}
 
 fi = open(sys.argv[2], 'r')
 for line in fi:
-    s = line.strip().split()
-    feat = int(s[0])
+    s      = line.strip().split()
+    feat   = int(s[0])
     weight = float(s[1])
     featWeight[feat] = weight
 fi.close()
 
 fi = open(sys.argv[1], 'r')
 for line in fi:
-    data = ints(line.strip().replace(":1", "").split())
-    clk = data[0]
-    mp = data[1]
-    fsid = 2 # feature start id
+    data  = ints(line.strip().replace(":1", "").split())
+    clk   = data[0]
+    mp    = data[1]
+    fsid  = 2 # feature start id
     feats = data[fsid:]
-    pred = estimator_lr(feats)
+    pred  = estimator_lr(feats)
     y.append(clk)
     yp.append(pred)
 fi.close()
 
 # evaluation
-auc = auc_roc_score(y, yp)
+auc  = auc_roc_score(y, yp)
 rmse = math.sqrt(mse(y, yp))
 print "algo\tauc\trmse"
 print "lr" + '\t' + str(auc) + '\t' + str(rmse)
