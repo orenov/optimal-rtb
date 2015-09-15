@@ -120,9 +120,9 @@ original_ecpc /= original_ctr
 original_ctr  /= imp_num
 
 class_ortb1 = datadrivenbidder.DD_ORTB1()
-class_ortb2 = datadrivenbidder.DD_ORTB2()
+#class_ortb2 = datadrivenbidder.DD_ORTB2()
 class_ortb1.batch_fit(data_for_ddrtb)
-class_ortb2.batch_fit(data_for_ddrtb)
+#class_ortb2.batch_fit(data_for_ddrtb)
 
 # read in test data
 fi = open(sys.argv[2], 'r') # test.yzx.txt
@@ -152,7 +152,7 @@ ortb1_paras     = list(itertools.product(list_c, list_multiplier))
 
 algo_paras = {"const" : const_paras, "rand"  : rand_paras,
               "mcpc"  : mcpc_paras,  "lin"   : lin_paras,
-              "ortb1" : class_ortb1, "ortb2" : class_ortb2}
+              "ortb1" : [class_ortb1]}
 
 # initalisation finished
 # rock!
