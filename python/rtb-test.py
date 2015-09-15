@@ -4,6 +4,7 @@ import random
 import math
 import os
 import yaml
+import itertools
 
 random.seed(10)
 
@@ -46,7 +47,7 @@ def simulate_one_bidding_strategy_with_parameter(cases, ctrs, tcost, proportion,
             bid = bidding_mcpc(original_ecpc, pctr)
         elif algo == "lin":
             bid = bidding_lin(pctr, original_ctr, para)
-        elif algo == "ortb1";
+        elif algo == "ortb1":
             bid = bidding_ortb1(pctr, para)
         else:
             print 'wrong bidding strategy name'
@@ -122,16 +123,16 @@ for line in fi:
 fi.close()
 
 # parameters setting for each bidding strategy
-budget_proportions = [64, 16] # , 32, 8]
+budget_proportions = [32]  # , 32, 8]
 const_paras     = range(2, 20, 2) + range(20, 100, 5) + range(100, 301, 10)
 rand_paras      = range(2, 20, 2) + range(20, 100, 5) + range(100, 501, 10)
 mcpc_paras      = [1]
 lin_paras       = range(2, 20, 2) + range(20, 100, 5) + range(100, 400, 10) + range(400, 800, 50)
-list_c          = range(2, 20, 2) + range(20, 100, 5) + range(100, 301, 10)
-list_multiplier = range(2, 20, 2) + range(20, 100, 5) + range(100, 301, 10)
-ortb1_paras     = zip(list_c, list_multiplier)
+list_c          = [20, 50, 80]
+list_multiplier = [x * 1E-07 for x in range(1, 41)]
+ortb1_paras     = list(itertools.product(list_c, list_multiplier))
 
-algo_paras = {"const":const_paras, "rand":rand_paras, "mcpc":mcpc_paras, "lin":lin_paras, "ortb1" : ortb1_paras}
+algo_paras = {"const":const_paras, "rand":rand_paras, "mcpc":mcpc_paras, "lin":lin_paras, "ortb1":ortb1_paras}
 
 # initalisation finished
 # rock!

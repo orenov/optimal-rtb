@@ -1,9 +1,9 @@
 logit:
     learning_rate : 0.01
-    trainRounds : 1
+    trainRounds : 2
     randomSeed : 5
     lambda : 0.000001
     initWeight : 0.05
     buffercase : 1000000
 bidprice:
-    maximumbid: 17
+    maximumbid: 1000
