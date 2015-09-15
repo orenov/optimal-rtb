@@ -24,7 +24,10 @@ def win_auction(case, bid):
 # budgetProportion clk cnv bid imp budget spend para
 def simulate_one_bidding_strategy_with_parameter(cases, ctrs, tcost, proportion, algo, para):
     budget = int(tcost / proportion) # intialise the budget
-    cost, clks, bids, imps = 0
+    cost = 0
+    clks = 0
+    bids = 0
+    imps = 0
     
     for idx in range(0, len(cases)):
         bid = 0

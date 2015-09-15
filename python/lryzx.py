@@ -46,36 +46,6 @@ class OnlineLogisticRegression:
     def getWeights(self):
         return(self.featWeight)
 
-def train_update_lr(data):
-    clk  = data[0]
-    mp   = data[1]
-    fsid = 2 # feature start id # predict part
-    pred = 0.0
-    for i in range(fsid, len(data)):
-        feat = data[i]
-        if feat not in featWeight:
-            featWeight[feat] = nextInitWeight()
-        pred += featWeight[feat]
-    pred = sigmoid(pred)
-    # start to update weight
-    # w_i = w_i + learning_rate * [ (y - p) * x_i - lamb * w_i ] 
-    for i in range(fsid, len(data)):
-        feat = data[i]
-        featWeight[feat] = featWeight[feat] * (1 - lamb) + eta * (clk - pred) 
-    return(0)
-
-def predict(data):
-    mp   = data[1]
-    fsid = 2 # feature start id
-    pred = 0.0
-    for i in range(fsid, len(data)):
-        feat = data[i]
-        if feat in featWeight:
-            pred += featWeight[feat]
-    pred = sigmoid(pred)
-    return pred
-
-
 if __name__ == '__main__':
     if len(sys.argv) < 3:
         print 'Usage: train.yzx.txt test.yzx.txt'
