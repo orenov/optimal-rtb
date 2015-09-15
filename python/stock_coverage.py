@@ -10,9 +10,8 @@ if __name__ == '__main__':
 
     counter_bids = {}
 
-    for bid_file in bids_files1:    
-        source_file = bz2.BZ2File("../../make-ipinyou-data/1458/train.log.txt", "r") 
-        for line in source_file: 
+    with open("../../make-ipinyou-data/1458/train.log.txt", 'r') as f:   
+        for line in f: 
             print line
             print len(line.strip().split("\t"))
             sys.exit(1)
