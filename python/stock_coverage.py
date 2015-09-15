@@ -53,8 +53,7 @@ if __name__ == '__main__':
     res["Season2"] = compute_coverage(folder_files2, bids_files2, imp_files2)
     res["Season3"] = compute_coverage(folder_files3, bids_files3, imp_files3)
 
-    for k, v in res:
-        print("{0} : {1}".format(k, v))
+    print(res)
 
 
 
