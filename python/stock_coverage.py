@@ -2,6 +2,8 @@ import bz2
 import sys
 
 def compute_coverage(folder, bids_files, imp_files):
+    counter_bids = 0
+    counter_imps = 0
     for bid_file in bids_files:    
         source_file = bz2.BZ2File("../../make-ipinyou-data/original-data/ipinyou.contest.dataset/" + folder + "/" + bid_file , "r") 
         for line in source_file: 
@@ -42,7 +44,7 @@ if __name__ == '__main__':
                     "bid.20131026.txt.bz2", "bid.20131027.txt.bz2", "bid.20131028.txt.bz2"]
     imp_files3  =  ["imp.20131019.txt.bz2", "imp.20131020.txt.bz2", "imp.20131021.txt.bz2", "imp.20131022.txt.bz2",
                     "imp.20131023.txt.bz2", "imp.20131024.txt.bz2", "imp.20131025.txt.bz2",
-                    "imp.20131026.txt.bz2", "imp.20131027.txt.bz2", "imp.20131028.txt.bz2"]
+                    "imp.20131026.txt.bz2", "imp.20131027.txt.bz2"]
     folder_files3 = "training3rd"
     #Dict for saving presentages
     res = {}
