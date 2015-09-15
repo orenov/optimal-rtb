@@ -60,6 +60,7 @@ if __name__ == '__main__':
     trainRounds   = config["logit"]["trainRounds"]
     initWeight    = config["logit"]["initWeight"]
     random.seed(config["logit"]["randomSeed"])
+    max_bid       = config["bidprice"]["maximumbid"]
 
     olr = OnlineLogisticRegression(eta, lamb, initWeight)
 
@@ -75,6 +76,8 @@ if __name__ == '__main__':
                 for train_obs in trainData:
                     clk  = train_obs[0]
                     mp   = train_obs[1]
+                    if mp > max_bid:
+                        continue
                     pred = olr.predict(train_obs[2:])
                     olr.update(train_obs[2:], pred, clk)
                 trainData = []
@@ -83,6 +86,8 @@ if __name__ == '__main__':
             for train_obs in trainData:
                 clk  = train_obs[0]
                 mp   = train_obs[1]
+                if mp > max_bid:
+                    continue
                 pred = olr.predict(train_obs[2:])
                 olr.update(train_obs[2:], pred, clk)
         fi.close()
@@ -93,8 +98,8 @@ if __name__ == '__main__':
         fi = open(sys.argv[2], 'r')
         for line in fi:
             data_obs  = convert_to_ints(line.replace(":1", "").split())
-            pred = olr.predict(data_obs[2:])
-            clk  = data_obs[0] 
+            pred      = olr.predict(data_obs[2:])
+            clk       = data_obs[0] 
             y.append(clk)
             yp.append(pred)
         fi.close()

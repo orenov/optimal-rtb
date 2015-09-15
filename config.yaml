@@ -5,3 +5,5 @@ logit:
     lambda : 0.000001
     initWeight : 0.05
     buffercase : 1000000
+bidprice:
+    maximumbid: 50

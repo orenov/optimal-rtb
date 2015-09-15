@@ -3,6 +3,7 @@ import sys
 import random
 import math
 import os
+import yaml
 
 random.seed(10)
 
@@ -66,6 +67,11 @@ if len(sys.argv) < 5:
     print 'Usage: python rtb-test.py train.yzx.txt test.yzx.txt test.yzx.txt.lr.pred rtb.result.txt'
     exit(-1)
 
+
+with open('../config.yaml', 'r') as f:
+    config = yaml.load(f)
+max_bid       = config["bidprice"]["maximumbid"]
+
 clicks_prices = []  # clk and price
 pctrs         = []  # pCTR from logistic regression prediciton
 total_cost    = 0   # total original cost during the test data
@@ -83,6 +89,8 @@ for line in fi:
         continue
     click = int(s[0])  # y
     cost  = int(s[1])  # z
+    if cost > max_bid:
+        continue
     imp_num       += 1
     original_ctr  += click
     original_ecpc += cost
