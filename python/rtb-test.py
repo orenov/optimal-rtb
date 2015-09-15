@@ -58,9 +58,9 @@ def simulate_one_bidding_strategy_with_parameter(cases, ctrs, tcost, proportion,
         elif algo == "lin":
             bid = bidding_lin(pctr, original_ctr, para)
         elif algo == "ortb1":
-            bid = bidding_ortb1(pctr, para)
+            bid = para.bidding(pctr)
         elif algo == "ortb2":
-            bid = biddint_ortb2(pctr, para)
+            bid = para.bidding(pctr)
         else:
             print 'wrong bidding strategy name'
             sys.exit(-1)
@@ -109,7 +109,7 @@ for line in fi:
         continue
     click = int(s[0])  # y
     cost  = int(s[1])  # z
-    data_for_ddrtb.append((None, cost))
+    data_for_ddrtb.append((None, float(cost)))
     if cost > max_bid:
         continue
     imp_num       += 1
@@ -119,8 +119,10 @@ fi.close()
 original_ecpc /= original_ctr
 original_ctr  /= imp_num
 
-tt_test = datadrivenbidder.DD_ORTB1()
-tt_test.batch_fit(data_for_ddrtb)
+class_ortb1 = datadrivenbidder.DD_ORTB1()
+class_ortb2 = datadrivenbidder.DD_ORTB2()
+class_ortb1.batch_fit(data_for_ddrtb)
+class_ortb2.batch_fit(data_for_ddrtb)
 
 # read in test data
 fi = open(sys.argv[2], 'r') # test.yzx.txt
@@ -148,8 +150,9 @@ list_c          = [20, 50, 80]
 list_multiplier = [x * 1E-07 for x in range(1, 41)]
 ortb1_paras     = list(itertools.product(list_c, list_multiplier))
 
-algo_paras = {"const":const_paras, "rand":rand_paras, "mcpc":mcpc_paras, "lin":lin_paras,
-              "ortb1":ortb1_paras, "ortb2" : ortb1_paras}
+algo_paras = {"const" : const_paras, "rand"  : rand_paras,
+              "mcpc"  : mcpc_paras,  "lin"   : lin_paras,
+              "ortb1" : class_ortb1, "ortb2" : class_ortb2}
 
 # initalisation finished
 # rock!
