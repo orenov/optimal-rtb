@@ -79,20 +79,20 @@ fi.close()
 # rock!
 budgetProportions = [32, 8, 2]
 constParas = range(2, 20, 2) + range(20, 100, 5) + range(100, 301, 10)  #[2, 4, 6, 8, 10, 20, 30, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300]
-randParas = range(2, 20, 2) + range(20, 100, 5) + range(100, 501, 10)  #[5, 10, 20, 30, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 350, 400, 450, 500]
-mcpcParas = [1]
-linParas = range(2, 20, 2) + range(20, 200, 5) + range(200, 300, 10) + range(300, 501, 25) # [10, 15, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 220, 250, 270, 300, 350, 400, 450, 500]
-algoParas = {"const":constParas, "rand":randParas, "mcpc-lr":mcpcParas, "mcpc-gbrt":mcpcParas, "lin-lr":linParas, "lin-gbrt":linParas}
+randParas  = range(2, 20, 2) + range(20, 100, 5) + range(100, 501, 10)  #[5, 10, 20, 30, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 350, 400, 450, 500]
+mcpcParas  = [1]
+linParas   = range(2, 20, 2) + range(20, 200, 5) + range(200, 300, 10) + range(300, 501, 25) # [10, 15, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 220, 250, 270, 300, 350, 400, 450, 500]
+algoParas  = {"const":constParas, "rand":randParas, "mcpc-lr":mcpcParas, "mcpc-gbrt":mcpcParas, "lin-lr":linParas, "lin-gbrt":linParas}
 
 # output format
 # budgetProportion clk cnv bid imp budget spend para
 def simulateABiddingStategyWithParameter(cases, tcost, proportion, algo, para):
     budget = int(tcost / proportion)
-    cost = 0
-    clks = 0
-    cnvs = 0
-    bids = 0
-    imps = 0
+    cost   = 0
+    clks   = 0
+    cnvs   = 0
+    bids   = 0
+    imps   = 0
     for idx in range(0, len(cases)):
         bid = 0
         if algo == "const":

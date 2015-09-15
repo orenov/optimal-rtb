@@ -5,6 +5,7 @@ import math
 import os
 import yaml
 import itertools
+import datadrivenbidder
 
 random.seed(10)
 
@@ -90,13 +91,13 @@ if len(sys.argv) < 5:
 with open('../config.yaml', 'r') as f:
     config = yaml.load(f)
 
-max_bid       = config["bidprice"]["maximumbid"]
-clicks_prices = []  # clk and price
-pctrs         = []  # pCTR from logistic regression prediciton
-total_cost    = 0   # total original cost during the test data
-original_ecpc = 0.  # original eCPC from train data
-original_ctr  = 0.  # original ctr from train data
-
+max_bid        = config["bidprice"]["maximumbid"]
+clicks_prices  = []  # clk and price
+pctrs          = []  # pCTR from logistic regression prediciton
+total_cost     = 0   # total original cost during the test data
+original_ecpc  = 0.  # original eCPC from train data
+original_ctr   = 0.  # original ctr from train data
+data_for_ddrtb = []
 # read in train data for original_ecpc and original_ctr
 fi      = open(sys.argv[1], 'r') # train.yzx.txt
 first   = True
@@ -108,6 +109,7 @@ for line in fi:
         continue
     click = int(s[0])  # y
     cost  = int(s[1])  # z
+    data_for_ddrtb.append((cost, None))
     if cost > max_bid:
         continue
     imp_num       += 1
@@ -116,6 +118,9 @@ for line in fi:
 fi.close()
 original_ecpc /= original_ctr
 original_ctr  /= imp_num
+
+tt_test = datadrivenbidder.DD_ORTB1()
+tt_test.batch_fit(data_for_ddrtb)
 
 # read in test data
 fi = open(sys.argv[2], 'r') # test.yzx.txt
