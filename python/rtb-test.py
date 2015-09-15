@@ -81,7 +81,7 @@ for line in fi:
         first = False
         continue
     click = int(s[0])  # y
-    cost = int(s[1])  # z
+    cost  = int(s[1])  # z
     imp_num += 1
     original_ctr += click
     original_ecpc += cost
@@ -112,7 +112,7 @@ rand_paras  = range(2, 20, 2) + range(20, 100, 5) + range(100, 501, 10)
 mcpc_paras  = [1]
 lin_paras   = range(2, 20, 2) + range(20, 100, 5) + range(100, 400, 10) + range(400, 800, 50)
 
-algo_paras = {"const":const_paras, "rand":rand_paras, "mcpc":mcpc_paras, "lin":lin_paras}
+algo_paras  = {"const":const_paras, "rand":rand_paras, "mcpc":mcpc_paras, "lin":lin_paras}
 
 # initalisation finished
 # rock!

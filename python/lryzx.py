@@ -7,8 +7,6 @@ import yaml
 import os
 from utils_metrics import *
 
-print(os.getcwd() + "\n")
-
 with open('../config.yaml', 'r') as f:
     config = yaml.load(f)
 
@@ -41,15 +39,15 @@ if len(sys.argv) < 3:
 for round in range(0, trainRounds):
     # train for this round
     fi = open(sys.argv[1], 'r')
-    lineNum = 0
+    lineNum   = 0
     trainData = []
     for line in fi:
         lineNum = (lineNum + 1) % bufferCaseNum
         trainData.append(ints(line.replace(":1", "").split()))
         if lineNum == 0:
             for data in trainData:
-                clk = data[0]
-                mp = data[1]
+                clk  = data[0]
+                mp   = data[1]
                 fsid = 2 # feature start id
                 # predict
                 pred = 0.0
@@ -68,8 +66,8 @@ for round in range(0, trainRounds):
 
     if len(trainData) > 0:
         for data in trainData:
-            clk = data[0]
-            mp  = data[1]
+            clk  = data[0]
+            mp   = data[1]
             fsid = 2 # feature start id
             # predict
             pred = 0.0
@@ -92,8 +90,8 @@ for round in range(0, trainRounds):
     fi = open(sys.argv[2], 'r')
     for line in fi:
         data = ints(line.replace(":1", "").split())
-        clk = data[0]
-        mp = data[1]
+        clk  = data[0]
+        mp   = data[1]
         fsid = 2 # feature start id
         pred = 0.0
         for i in range(fsid, len(data)):

@@ -9,7 +9,7 @@ def se(actual, predicted):
         print("Lengths of predictions/actuals are different")
     temp = [0] * len(actual)
     for i in range(0, len(actual)):
-        temp[i] = (actual[i] - predicted[i])^2
+        temp[i] = (actual[i] - predicted[i])**2
 
     return(temp)
 
@@ -45,7 +45,7 @@ def sle(actual, predicted):
         print("Lengths of predictions/actuals are different")
     temp = [0] * len(actual)
     for i in range(0, len(actual)):
-        temp[i] = (math.log(1 + actual[i]) - math.log(1 + predicted[i]))^2
+        temp[i] = (math.log(1 + actual[i]) - math.log(1 + predicted[i]))**2
 
     return(temp)
 
