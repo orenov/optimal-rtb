@@ -15,6 +15,7 @@ if __name__ == '__main__':
         source_file = bz2.BZ2File("../../make-ipinyou-data/original-data/ipinyou.contest.dataset/training1st/" + bid_file , "r") 
         for line in source_file: 
             counter_bids += 1
+        print("File {0} counting finished".format(bid_file))
     
     print("Bids counter = {0}".format(counter_bids))
 
@@ -22,5 +23,7 @@ if __name__ == '__main__':
         source_file = bz2.BZ2File("../../make-ipinyou-data/original-data/ipinyou.contest.dataset/training1st/" + imp_file , "r") 
         for line in source_file: 
             counter_imps += 1
+        print("File {0} counting finished".format(imp_file))
 
     print("Imps counter = {0}".format(counter_imps))
+    print("Stock Coverage = {0}".format(float(counter_imps)/counter_bids))
