@@ -1,4 +1,4 @@
-campaigns="1458"
+campaigns="3476"
 folder=../../make-ipinyou-data
 resultsfolder=../results
 

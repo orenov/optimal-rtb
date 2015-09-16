@@ -29,7 +29,7 @@ def bidding_ortb1(pctr, para):
     sq = math.sqrt(c * pctr/float(multiplier) + c**2) - c
     return int(sq)
 
-def biddint_ortb2(pctr, para):
+def bidding_ortb2(pctr, para):
     c, multiplier = para
     c = float(c)
     multiplier  = float(multiplier)
@@ -121,9 +121,9 @@ original_ctr  /= imp_num
 
 # Fitting init
 class_ortb1 = datadrivenbidder.DD_ORTB1()
-#class_ortb2 = datadrivenbidder.DD_ORTB2()
+class_ortb2 = datadrivenbidder.DD_ORTB2()
 class_ortb1.batch_fit(data_for_ddrtb)
-#class_ortb2.batch_fit(data_for_ddrtb)
+class_ortb2.batch_fit(data_for_ddrtb)
 
 # read in test data
 fi = open(sys.argv[2], 'r') # test.yzx.txt
@@ -142,19 +142,20 @@ for line in fi:
 fi.close()
 
 # parameters setting for each bidding strategy
-budget_proportions = [32]  # , 32, 8]
+budget_proportions = [64, 32]  # , 32, 8]
 const_paras     = range(2, 20, 2) + range(20, 100, 5) + range(100, 301, 10)
 rand_paras      = range(2, 20, 2) + range(20, 100, 5) + range(100, 501, 10)
 mcpc_paras      = [1]
 lin_paras       = range(2, 20, 2) + range(20, 100, 5) + range(100, 400, 10) + range(400, 800, 50)
 
 best_c          = class_ortb1.getC()
-list_lambd      = [x * 1E-07 for x in range(1, 41)]
-ortb1_paras     = [DD_ORTB1(best_c, x) for x in list_lambd]
+list_lambd      = [x * 1E-07 for x in range(1, 1000)]
+ortb1_paras     = [datadrivenbidder.DD_ORTB1(best_c, x) for x in list_lambd]
+ortb2_paras     = [datadrivenbidder.DD_ORTB2(best_c, x) for x in list_lambd]
 
 algo_paras = {"const" : const_paras, "rand"  : rand_paras,
               "mcpc"  : mcpc_paras,  "lin"   : lin_paras,
-              "ortb1" : ortb1_paras}
+              "ortb1" : ortb1_paras, "ortb2" : ortb2_paras}
 
 # initalisation finished
 # rock!

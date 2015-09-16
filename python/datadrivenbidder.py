@@ -8,7 +8,8 @@ def ortb1_win(x, c):
     return(x/(x+c))
 
 def ortb2_win(x,c):
-    return((x**2)/(x**2 + c**2))
+    ans = [x1*x1/(x1*x1 + c*c) for x1 in x]
+    return(np.array(ans))
 
 class DD_ORTB1():
     def __init__(self, c = None, lamb = None):
@@ -36,9 +37,9 @@ class DD_ORTB1():
         return(self.c)
 
 class DD_ORTB2():
-    def __init__(self):
-        self.c    = None
-        self.lamb = None
+    def __init__(self, c = None, lamb = None):
+        self.c    = c
+        self.lamb = lamb
         pass
 
     def batch_fit(self, data):
@@ -48,6 +49,8 @@ class DD_ORTB2():
         pp = sorted([x[1] for x in data]) #paying price
         de = [float(x) / (len(pp) + 1) for x in range(1, len(pp)+1)]
         popt, pcov = curve_fit(ortb2_win, pp, de)
+	print(popt)
+	print(pcov)
         self.c = popt[0]
         # TODO tune lambda
         self.lamb = 1E-06

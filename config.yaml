@@ -1,6 +1,6 @@
 logit:
     learning_rate : 0.01
-    trainRounds : 2
+    trainRounds : 5
     randomSeed : 5
     lambda : 0.000001
     initWeight : 0.05
