@@ -133,6 +133,11 @@ class_ortb2 = datadrivenbidder.DD_ORTB2()
 class_ortb1.batch_fit(data_for_ddrtb)
 class_ortb2.batch_fit(data_for_ddrtb)
 
+constant = datadrivenbidder.const_bidder()
+constant.fit(data_tr)
+print("Best param = {0}, Best score = {1}".foramt(constant.constbid, constant.best_score))
+
+
 # read in test data
 fi = open(sys.argv[2], 'r') # test.yzx.txt
 for line in fi:

@@ -91,5 +91,22 @@ class const_bidder():
             sys.exit(1)
         return(self.constbid)
 
+class train_rtb_simulator():
+    def __init__(self):
+        pass
+
+    def simulate(self, budget, strategy, data):
+        # data - list of (click, cost, pctr) #Warning can overfit!11
+        sum_goal = 0
+        spend    = 0.
+        for d in data:
+            if spend > budget:
+                break
+            if strategy.bidding(d[2]) > d[1]:
+                sum_goal += d[0]
+                spend    += d[1]
+
+        return(sum_goal)
+
 
 
