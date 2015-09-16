@@ -62,7 +62,34 @@ class DD_ORTB2():
         
         return int(sq)
 
+class const_bidder():
+    def __init__(self, constbid = None):
+        self.constbid = constbid
 
+    def fit(self, data):
+        # Optional function: you can specify exact parameter using constbid
+        # data is list of (isclick, pay_price, ...)
+        contstant_pars = range(5, 300, 10)
+        best_par       = None
+        best_score     = 0
+        sum_cost       = sum[x[1] for x in data]
+        budget         = sum_cost * 1. / 32
+        simulator      = train_rtb_simulator()
+        for par in contstant_pars:
+            self.constbid  = par 
+            score          = simulator.simulate(budge, self, data)
+            if score > best_score:
+                best_score = score
+                best_par   = par
+
+        self.constbid   = best_par
+        self.best_score = best_score
+
+    def bidding(self, pctr):
+        if self.constbid == None:
+            print("Constant Bid not Specified.")
+            sys.exit(1)
+        return(self.constbid)
 
 
 
