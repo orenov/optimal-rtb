@@ -58,9 +58,13 @@ def simulate_one_bidding_strategy_with_parameter(cases, ctrs, tcost, proportion,
         elif algo == "lin":
             bid = bidding_lin(pctr, original_ctr, para)
         elif algo == "ortb1":
-            bid = para.bidding(pctr)
+            c, lamb = para
+            bidder  = datadrivenbidder.DD_ORTB1(c, lamb)
+            bid     = bidder.bidding(pctr) 
         elif algo == "ortb2":
-            bid = para.bidding(pctr)
+            c, lamb = para
+            bidder  = datadrivenbidder.DD_ORTB2(c, lamb)
+            bid     = bidder.bidding(pctr)
         else:
             print 'wrong bidding strategy name'
             sys.exit(-1)
@@ -149,9 +153,9 @@ mcpc_paras      = [1]
 lin_paras       = range(2, 20, 2) + range(20, 100, 5) + range(100, 400, 10) + range(400, 800, 50)
 
 best_c          = class_ortb1.getC()
-list_lambd      = [x * 1E-07 for x in range(1, 1000)]
-ortb1_paras     = [datadrivenbidder.DD_ORTB1(best_c, x) for x in list_lambd]
-ortb2_paras     = [datadrivenbidder.DD_ORTB2(best_c, x) for x in list_lambd]
+list_lambd      = [x * 1E-07 for x in range(1, 100)]
+ortb1_paras     = [(best_c, x) for x in list_lambd]
+ortb2_paras     = [(best_c, x) for x in list_lambd]
 
 algo_paras = {"const" : const_paras, "rand"  : rand_paras,
               "mcpc"  : mcpc_paras,  "lin"   : lin_paras,
