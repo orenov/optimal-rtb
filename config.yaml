@@ -6,4 +6,4 @@ logit:
     initWeight : 0.05
     buffercase : 1000000
 bidprice:
-    maximumbid: 1000
+    maximumbid: 33

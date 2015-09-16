@@ -113,9 +113,9 @@ for line in fi:
         continue
     click = int(s[0])  # y
     cost  = int(s[1])  # z
-    data_for_ddrtb.append((None, float(cost)))
     if cost > max_bid:
         continue
+    data_for_ddrtb.append((None, float(cost)))
     imp_num       += 1
     original_ctr  += click
     original_ecpc += cost
